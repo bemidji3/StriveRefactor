@@ -16,7 +16,7 @@ function GetStarted() {
                 />
             </View>
             <View style={styles.buttonView}>
-                <CustomButton titleText={'Get Started'} screenName={'landing'} />
+                <CustomButton titleText={'Get Started'} screenName={'first_profile'} />
                 <Text style={styles.disclaimerText}>
                     By clicking "Get Started" you agree to our Terms and Privacy Policy.
                 </Text>
