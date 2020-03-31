@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 
-function CustomButton({screenName, titleText}) {
+function CustomButton({screenName, titleText, disabled}) {
     console.log("screenName ", screenName);
     const navigation = useNavigation();
     const handleButtonPress = () => {
@@ -11,6 +11,7 @@ function CustomButton({screenName, titleText}) {
     };
     return (
         <TouchableOpacity
+            disable={disabled}
             style={styles.button}
             mode={'contained'}
             onPress={handleButtonPress}>
