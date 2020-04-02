@@ -1,22 +1,19 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {TextField} from "react-native-ui-lib";
-import CustomButton from "../../misc_components/CustomButton/CustomButton";
+import SubmitButton from "../../misc_components/SubmitButton/SubmitButton";
 
-function filterInput(inputString, regex){
-    return regex.test(inputString);
-}
+function emailRegex(email){
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+};
 
-function FirstProfileScreen() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [age, setAge] = useState(0);
-    const [userDescription, setUserDescription] = useState("");
+function SecondProfileScreen() {
+    console.log("rendering SecondProfileScreen ");
 
-    console.log("firstName ", firstName);
-
-    const nameRegex = /^[A-Za-z ]+$/;
-    const ageRegex = /^\d+$/;
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [celebrity, setCelebrity] = useState("");
 
     return (
         <View style={styles.mainView}>
@@ -34,15 +31,16 @@ function FirstProfileScreen() {
             </View>
             <View style={styles.mainContentView}>
                 <View style={styles.mainContentInputView}>
-                    <TextField style={styles.textField} title={'First name'} titleStyle={styles.textFieldTitle} value={firstName} onChangeText={text => setFirstName(text)} error={!filterInput(firstName, nameRegex)} />
-                    <TextField style={styles.textField} title={'Last name'} titleStyle={styles.textFieldTitle} value={lastName} onChangeText={text => setLastName(text)} error={!filterInput(lastName, nameRegex)}/>
-                    <TextField style={styles.textField} title={'Age'} value={age} titleStyle={styles.textFieldTitle} onChangeText={text => setAge(text)} error={!filterInput(age, ageRegex)}/>
-                    <TextField style={styles.textField} title={'What best describes you?'} titleStyle={styles.textFieldTitle} placeholder={'e.g. High school student'} value={userDescription} onChangeText={text => setUserDescription(text)}/>
+                    <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => setEmail(text)} error={emailRegex(email)}/>
+                    <TextField style={styles.textField} title={'Phone number'} titleStyle={styles.textFieldTitle} value={phone} onChangeText={text => setPhone(text)}/>
+                    <View>
+                        <Text style={styles.customTopText}> Which celebrity would you like to </Text>
+                    </View>
+                    <TextField style={styles.textField} title={' see on strive?'} titleStyle={styles.textFieldTitle} value={celebrity} onChangeText={text => setCelebrity(text)}/>
                 </View>
                 <View style={styles.mainContentButtonView}>
-                    <CustomButton titleText={'Next'} screenName={'second_profile'} disabled={!filterInput(firstName, nameRegex) || !filterInput(lastName, nameRegex) || !filterInput(age, ageRegex) || userDescription === ''}/>
+                    <SubmitButton titleText={'Strive!'} disabled={email === '' || phone === '' || celebrity === ''}/>
                 </View>
-
             </View>
         </View>
     );
@@ -55,6 +53,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F79353',
     },
+    customTopText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#636364',
+        marginLeft: -30,
+        width: '85%',
+    },
+    customTopTextView: {
+        alignItems: 'flex-start',
+    },
     textField: {
         width: '85%',
     },
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
         flex: 2,
     },
     topView: {
-       flex: 2,
+        flex: 2,
     },
     topViewImage: {
         flex: 5,
@@ -102,4 +110,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FirstProfileScreen;
+export default SecondProfileScreen;

@@ -7,6 +7,7 @@ import SecondInfoScreen from "../screens/SecondInfoScreen/SecondInfoScreen";
 import ThirdInfoScreen from "../screens/ThirdInfoScreen/ThirdInfoScreen";
 import GetStarted from "../screens/GetStarted/GetStarted";
 import FirstProfileScreen from "../screens/FirstProfileScreen/FirstProfileScreen";
+import SecondProfileScreen from "../screens/SecondProfileScreen/SecondProfileScreen";
 
 
 
@@ -22,6 +23,7 @@ function AppNavigator() {
                 <Stack.Screen name={'third_info'} component={ThirdInfoScreen} />
                 <Stack.Screen name={'get_started'} component={GetStarted} />
                 <Stack.Screen name={'first_profile'} component={FirstProfileScreen}/>
+                <Stack.Screen name={'second_profile'} component={SecondProfileScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

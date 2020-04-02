@@ -11,8 +11,8 @@ function CustomButton({screenName, titleText, disabled}) {
     };
     return (
         <TouchableOpacity
-            disable={disabled}
-            style={styles.button}
+            disabled={disabled}
+            style={disabled ? styles.buttonDisabled : styles.buttonActive}
             mode={'contained'}
             onPress={handleButtonPress}>
             <Text style={styles.text}> {titleText} </Text>
@@ -21,13 +21,21 @@ function CustomButton({screenName, titleText, disabled}) {
 }
 
 const styles = StyleSheet.create({
-    button: {
+    buttonActive: {
         backgroundColor: '#3CD0F5',
         height: 60,
         width: 300,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 15,
+    },
+    buttonDisabled: {
+        height: 60,
+        width: 300,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 15,
+        backgroundColor: '#A4A3A5',
     },
     text: {
         color: '#ffffff',
