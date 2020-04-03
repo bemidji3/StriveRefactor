@@ -23,7 +23,7 @@ function InfoScreen({customText, nextScreen, backgroundImageName}) {
                 </Text>
             </View>
             <View style={styles.buttonView}>
-                <CustomButton titleText={'Next'} screenName={nextScreen} />
+                <CustomButton titleText={'Next'} screenName={nextScreen}/>
             </View>
         </View>
     );
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 4,
-        height: 400,
-        width: 500,
+        height: 450,
+        width: 450,
         resizeMode: 'contain',
     },
     logoView: {
