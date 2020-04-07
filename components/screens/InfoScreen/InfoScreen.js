@@ -7,6 +7,7 @@ function InfoScreen({customText, nextScreen, backgroundImageName}) {
         'first' : require('./background_image_first.png'),
         'second' : require('./background_image_second.png'),
         'third' : require('./background_image_third.png'),
+        'fourth' : require('./background_image_fourth.png'),
     };
     return (
         <View style={styles.mainView}>
@@ -39,18 +40,20 @@ const styles = StyleSheet.create({
     text: {
         color: '#5E5E5E',
         fontSize: 20,
+        textAlign: 'center',
     },
     mainView: {
         flex: 1,
         alignItems: 'center',
         //justifyContent: 'flex-end',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#F2F4F7',
     },
     image: {
         flex: 4,
-        height: 450,
-        width: 450,
+        height: 700,
+        width: 400,
         resizeMode: 'contain',
+        alignItems: 'flex-start',
     },
     logoView: {
         flex: 1,
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: 350,
+        width: '85%',
         marginTop: 20,
     },
     buttonView: {

@@ -12,15 +12,15 @@ function LandingScreen() {
             <Image style={styles.image} source={require('./background_image.png')} />
             <View style={styles.textView}>
                 <Text style={styles.text}>
-                    The only debit card platform that offers entertaining content designed
-                    to boost your financial literacy.
+                    The only debit card that donates 10% of its profits to charitable causes
+                    and prioritizes the financial health of its users.
                 </Text>
             </View>
             <View style={styles.buttonView}>
                 <CustomButton
                     style={styles.button}
                     screenName={'first_info'}
-                    titleText={'Get Started'}
+                    titleText={'Learn More'}
                 />
             </View>
         </View>
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 20,
         color: '#ffffff',
+        textAlign: 'center',
     },
     buttonView: {
         flex: 1,
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        width: 350,
+        width: '85%',
         marginTop: 20,
     },
 });
