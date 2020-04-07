@@ -5,10 +5,12 @@ import CustomButton from "../../misc_components/CustomButton/CustomButton";
 function LandingScreen() {
     return (
         <View style={styles.mainView}>
-            <Image
-                style={styles.logo}
-                source={require('../../../images/strive_white_logo.png')}
-            />
+            <View style={styles.logoView}>
+                <Image
+                    style={styles.logo}
+                    source={require('../../../images/strive_white_logo.png')}
+                />
+            </View>
             <Image style={styles.image} source={require('./background_image.png')} />
             <View style={styles.textView}>
                 <Text style={styles.text}>
@@ -45,12 +47,15 @@ const styles = StyleSheet.create({
         height: 75,
         alignSelf: 'flex-start',
     },
-    logo: {
+    logoView: {
         flex: 1,
-        height: 50,
-        width: 150,
         resizeMode: 'contain',
-        marginTop: 20,
+        justifyContent: 'flex-start',
+    },
+    logo: {
+        width: 250,
+        height: 200,
+        resizeMode: 'contain',
     },
     text: {
         flex: 1,

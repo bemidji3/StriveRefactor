@@ -32,8 +32,8 @@ function InfoScreen({customText, nextScreen, backgroundImageName}) {
 
 const styles = StyleSheet.create({
     logo: {
-        height: 75,
-        width: 200,
+        width: 250,
+        height: 200,
         resizeMode: 'contain',
         paddingTop: 30,
     },
@@ -49,15 +49,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#F2F4F7',
     },
     image: {
-        flex: 4,
+        flex: 3,
         height: 700,
         width: 400,
         resizeMode: 'contain',
         alignItems: 'flex-start',
     },
     logoView: {
-        flex: 1,
-        justifyContent: 'flex-end',
+        flex: 2,
+        justifyContent: 'flex-start',
     },
     textView: {
         flex: 1,

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {TextField} from "react-native-ui-lib";
 import SubmitButton from "../../misc_components/SubmitButton/SubmitButton";
 
@@ -29,18 +29,18 @@ function SecondProfileScreen() {
                     </Text>
                 </View>
             </View>
-            <View style={styles.mainContentView}>
-                <View style={styles.mainContentInputView}>
-                    <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => setEmail(text)} error={emailRegex(email)}/>
+            <KeyboardAvoidingView style={styles.mainContentView} behavior={'padding'}>
+                <ScrollView style={styles.mainContentInputView} contentContainerStyle={{alignItems: 'center'}}>
+                    <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => setEmail(text)} error={!emailRegex(email)}/>
                     <TextField style={styles.textField} title={'Phone number'} titleStyle={styles.textFieldTitle} value={phone} onChangeText={text => setPhone(text)}/>
                     <View>
                         <Text style={styles.customTopText}> Which celebrity would you like to </Text>
                     </View>
                     <TextField style={styles.textField} title={' see on strive?'} titleStyle={styles.textFieldTitle} value={celebrity} onChangeText={text => setCelebrity(text)}/>
-                </View>
-                <View style={styles.mainContentButtonView}>
-                    <SubmitButton titleText={'Strive!'} disabled={email === '' || phone === '' || celebrity === ''}/>
-                </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+            <View style={styles.mainContentButtonView}>
+                <SubmitButton titleText={'Strive!'} disabled={email === '' || phone === '' || celebrity === ''}/>
             </View>
         </View>
     );
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#636364',
-        marginLeft: -30,
+        marginLeft: -5,
         width: '85%',
     },
     customTopTextView: {
@@ -68,10 +68,13 @@ const styles = StyleSheet.create({
     },
     mainContentInputView: {
         flex: 4,
-        alignItems: 'center',
+        width: '100%',
     },
     mainContentButtonView: {
-        flex: 2,
+        flex: 1,
+        backgroundColor: '#F2F4F7',
+        width: '100%',
+        alignItems: 'center'
     },
     topView: {
         flex: 2,
@@ -87,17 +90,16 @@ const styles = StyleSheet.create({
         paddingTop: 100,
     },
     mainContentView: {
-        flex: 4,
+        flex: 3,
         alignItems: 'center',
         backgroundColor: '#F2F4F7',
         width: '100%',
         paddingTop: 25,
     },
     image: {
-        height: 75,
+        height: 200,
         width: 200,
         resizeMode: 'contain',
-        marginTop: 50,
     },
     invitationText: {
         fontSize: 20,
