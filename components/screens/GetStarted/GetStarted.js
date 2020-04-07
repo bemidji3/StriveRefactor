@@ -5,16 +5,16 @@ import CustomButton from "../../misc_components/CustomButton/CustomButton";
 function GetStarted() {
     return (
         <View style={styles.mainView}>
-            <Image
-                style={styles.logo}
-                source={require('../../../images/strive_white_logo.png')}
-            />
-            <View style={styles.imageView}>
+            <View style={styles.logoView}>
+                <Image
+                    style={styles.logo}
+                    source={require('../../../images/strive_white_logo.png')}
+                />
+            </View>
                 <Image
                     style={styles.image}
                     source={require('./background_image.png')}
                 />
-            </View>
             <View style={styles.buttonView}>
                 <CustomButton titleText={'Get Started'} screenName={'first_profile'} />
                 <Text style={styles.disclaimerText}>
@@ -33,18 +33,23 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     logo: {
-        flex: 1,
-        height: 75,
-        width: 200,
+        marginTop: 60,
+        height: 250,
+        width: 250,
         resizeMode: 'contain',
     },
+    logoView: {
+        flex: 1,
+        justifyContent: 'center',
+    },
     image: {
-        height: 500,
-        width: 500,
+        flex: 4,
+        width: 400,
+        height: 700,
         resizeMode: 'contain',
     },
     imageView: {
-        flex: 3,
+        flex: 4,
     },
     buttonView: {
         flex: 1,
@@ -54,6 +59,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         width: 300,
         paddingTop: 10,
+        textAlign: 'center',
     },
 });
 

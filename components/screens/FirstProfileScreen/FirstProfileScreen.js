@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {TextField} from "react-native-ui-lib";
 import CustomButton from "../../misc_components/CustomButton/CustomButton";
 
@@ -26,23 +26,20 @@ function FirstProfileScreen() {
                 </View>
                 <View styles={styles.topViewText}>
                     <Text style={styles.invitationText}>
-                        {' '}
-                        {' '}
                         Let's set up your profile
                     </Text>
                 </View>
             </View>
-            <View style={styles.mainContentView}>
-                <View style={styles.mainContentInputView}>
+            <KeyboardAvoidingView style={styles.mainContentView} behavior={'padding'}>
+                <ScrollView style={styles.mainContentInputView} contentContainerStyle={{alignItems: 'center'}}>
                     <TextField style={styles.textField} title={'First name'} titleStyle={styles.textFieldTitle} value={firstName} onChangeText={text => setFirstName(text)} error={!filterInput(firstName, nameRegex)} />
                     <TextField style={styles.textField} title={'Last name'} titleStyle={styles.textFieldTitle} value={lastName} onChangeText={text => setLastName(text)} error={!filterInput(lastName, nameRegex)}/>
                     <TextField style={styles.textField} title={'Age'} value={age} titleStyle={styles.textFieldTitle} onChangeText={text => setAge(text)} error={!filterInput(age, ageRegex)}/>
                     <TextField style={styles.textField} title={'What best describes you?'} titleStyle={styles.textFieldTitle} placeholder={'e.g. High school student'} value={userDescription} onChangeText={text => setUserDescription(text)}/>
-                </View>
-                <View style={styles.mainContentButtonView}>
-                    <CustomButton titleText={'Next'} screenName={'second_profile'} disabled={!filterInput(firstName, nameRegex) || !filterInput(lastName, nameRegex) || !filterInput(age, ageRegex) || userDescription === ''}/>
-                </View>
-
+                </ScrollView>
+            </KeyboardAvoidingView>
+            <View style={styles.mainContentButtonView}>
+                <CustomButton titleText={'Next'} screenName={'second_profile'} disabled={!filterInput(firstName, nameRegex) || !filterInput(lastName, nameRegex) || !filterInput(age, ageRegex) || userDescription === ''}/>
             </View>
         </View>
     );
@@ -60,10 +57,13 @@ const styles = StyleSheet.create({
     },
     mainContentInputView: {
         flex: 4,
-        alignItems: 'center',
+        width: "100%",
     },
     mainContentButtonView: {
-        flex: 2,
+        flex: 1,
+        backgroundColor: '#F2F4F7',
+        width: '100%',
+        alignItems: 'center'
     },
     topView: {
        flex: 2,
@@ -75,21 +75,19 @@ const styles = StyleSheet.create({
     topViewText: {
         flex: 1,
         justifyContent: 'flex-end',
-        marginTop: 50,
         paddingTop: 100,
     },
     mainContentView: {
-        flex: 4,
+        flex: 3,
         alignItems: 'center',
         backgroundColor: '#F2F4F7',
         width: '100%',
         paddingTop: 25,
     },
     image: {
-        height: 75,
+        height: 200,
         width: 200,
         resizeMode: 'contain',
-        marginTop: 50,
     },
     invitationText: {
         fontSize: 20,
