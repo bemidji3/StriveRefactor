@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {Text, View, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {TextField} from "react-native-ui-lib";
 import CustomButton from "../../misc_components/CustomButton/CustomButton";
+import { updateFirstName, updateLastName } from "../../../redux/actions";
 
 function filterInput(inputString, regex){
     return regex.test(inputString);
@@ -13,10 +15,17 @@ function FirstProfileScreen() {
     const [age, setAge] = useState(0);
     const [userDescription, setUserDescription] = useState("");
 
+    const dispatch = useDispatch();
+
     console.log("firstName ", firstName);
 
     const nameRegex = /^[A-Za-z ]+$/;
     const ageRegex = /^\d+$/;
+
+    const handleFirstNameChange = (text) => {
+        setFirstName(text);
+        dispatch(updateFirstName(text));
+    };
 
     return (
         <View style={styles.mainView}>
@@ -32,7 +41,7 @@ function FirstProfileScreen() {
             </View>
             <KeyboardAvoidingView style={styles.mainContentView} behavior={'padding'}>
                 <ScrollView style={styles.mainContentInputView} contentContainerStyle={{alignItems: 'center'}}>
-                    <TextField style={styles.textField} title={'First name'} titleStyle={styles.textFieldTitle} value={firstName} onChangeText={text => setFirstName(text)} error={!filterInput(firstName, nameRegex)} />
+                    <TextField style={styles.textField} title={'First name'} titleStyle={styles.textFieldTitle} value={firstName} onChangeText={text => handleFirstNameChange(text)} error={!filterInput(firstName, nameRegex)} />
                     <TextField style={styles.textField} title={'Last name'} titleStyle={styles.textFieldTitle} value={lastName} onChangeText={text => setLastName(text)} error={!filterInput(lastName, nameRegex)}/>
                     <TextField style={styles.textField} title={'Age'} value={age} titleStyle={styles.textFieldTitle} onChangeText={text => setAge(text)} error={!filterInput(age, ageRegex)}/>
                     <TextField style={styles.textField} title={'What best describes you?'} titleStyle={styles.textFieldTitle} placeholder={'e.g. High school student'} value={userDescription} onChangeText={text => setUserDescription(text)}/>

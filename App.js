@@ -1,10 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import striveApp from "./redux/reducer";
 import AppNavigator from "./components/AppNavigator/AppNavigator";
+
+const store = createStore(striveApp);
 
 export default function App() {
   return (
-    <AppNavigator/>
+      <Provider store={store}>
+        <AppNavigator/>
+      </Provider>
   );
 }
 
