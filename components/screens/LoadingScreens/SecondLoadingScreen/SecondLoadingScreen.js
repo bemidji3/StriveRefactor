@@ -7,7 +7,7 @@ function SecondLoadingScreen(){
 
     setTimeout(() => {
         navigation.navigate("blank_screen")
-    }, 2000);
+    }, 1000);
 
     return(
         <LoadingScreen logoColor={'white'} backgroundColor={'orange'}/>

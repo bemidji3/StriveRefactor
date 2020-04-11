@@ -2,18 +2,51 @@ import React, {useState} from 'react';
 import {Text, View, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {TextField} from "react-native-ui-lib";
 import SubmitButton from "../../misc_components/SubmitButton/SubmitButton";
+import { connect } from 'react-redux';
+import {updateCelebrity, updateEmail, updatePhone} from "../../../redux/actions";
 
 function emailRegex(email){
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 };
 
-function SecondProfileScreen() {
-    console.log("rendering SecondProfileScreen ");
+const mapState = state => {
+    return {
+        state,
+    }
+};
 
+const mapDispatch = dispatch => {
+    console.log("mapping dispatch to props ")
+    return {
+        updatePhone: (text) => dispatch(updatePhone(text)),
+        updateEmail: (text) => dispatch(updateEmail(text)),
+        updateCelebrity: (text) => dispatch(updateCelebrity(text)),
+    }
+};
+
+function SecondProfileScreen({updatePhone, updateEmail, updateCelebrity, state}) {
+
+
+    console.log("state, ", state);
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [celebrity, setCelebrity] = useState("");
+
+    const handlePhoneChange = (text) => {
+        setPhone(text);
+        updatePhone(text);
+    };
+
+    const handleEmailChange = (text) => {
+        setEmail(text);
+        updateEmail(text);
+    };
+
+    const handleCelebrityChange = (text) => {
+        setCelebrity(text);
+        updateCelebrity(text);
+    };
 
     return (
         <View style={styles.mainView}>
@@ -31,21 +64,23 @@ function SecondProfileScreen() {
             </View>
             <KeyboardAvoidingView style={styles.mainContentView} behavior={'padding'}>
                 <ScrollView style={styles.mainContentInputView} contentContainerStyle={{alignItems: 'center'}}>
-                    <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => setEmail(text)} error={!emailRegex(email)}/>
-                    <TextField style={styles.textField} title={'Phone number'} titleStyle={styles.textFieldTitle} value={phone} onChangeText={text => setPhone(text)}/>
+                    <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => handleEmailChange(text)} error={!emailRegex(email)}/>
+                    <TextField style={styles.textField} title={'Phone number'} titleStyle={styles.textFieldTitle} value={phone} onChangeText={text => handlePhoneChange(text)}/>
                     <View>
                         <Text style={styles.customTopText}> Which celebrity would you like to </Text>
                     </View>
-                    <TextField style={styles.textField} title={' see on strive?'} titleStyle={styles.textFieldTitle} value={celebrity} onChangeText={text => setCelebrity(text)}/>
+                    <TextField style={styles.textField} title={' see on strive?'} titleStyle={styles.textFieldTitle} value={celebrity} onChangeText={text => handleCelebrityChange(text)}/>
                 </ScrollView>
             </KeyboardAvoidingView>
             <View style={styles.mainContentButtonView}>
-                <SubmitButton titleText={'Strive!'} disabled={email === '' || phone === '' || celebrity === ''}/>
+                <SubmitButton titleText={'Strive!'} disabled={email === '' || phone === '' || celebrity === ''} />
             </View>
         </View>
     );
 
 }
+
+export default connect(mapState, mapDispatch)(SecondProfileScreen);
 
 const styles = StyleSheet.create({
     mainView: {
@@ -111,5 +146,3 @@ const styles = StyleSheet.create({
         color: '#636364',
     },
 });
-
-export default SecondProfileScreen;

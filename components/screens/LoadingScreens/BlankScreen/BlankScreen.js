@@ -8,7 +8,7 @@ function BlankScreen(){
 
     setTimeout(() => {
         navigation.navigate("landing")
-    }, 1000);
+    }, 500);
 
     return (
         <View style={styles.mainView}/>

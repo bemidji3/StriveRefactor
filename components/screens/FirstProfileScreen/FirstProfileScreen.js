@@ -1,30 +1,61 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import React, { useState } from 'react';
+import {connect} from 'react-redux';
 import {Text, View, StyleSheet, Image, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {TextField} from "react-native-ui-lib";
 import CustomButton from "../../misc_components/CustomButton/CustomButton";
-import { updateFirstName, updateLastName } from "../../../redux/actions";
+import {
+    updateFirstName,
+    updateLastName,
+    updateAge,
+    updateDescription,
+} from "../../../redux/actions";
 
 function filterInput(inputString, regex){
     return regex.test(inputString);
 }
 
-function FirstProfileScreen() {
+const mapState = state => {
+    return {
+        state,
+    }
+};
+
+const mapDispatch = dispatch => {
+    return {
+        updateFirstName: (text) => dispatch(updateFirstName(text)),
+        updateLastName: (text) => dispatch(updateLastName(text)),
+        updateAge: (text) => dispatch(updateAge(text)),
+        updateDescription: (text) => dispatch(updateDescription(text)),
+    }
+};
+
+function FirstProfileScreen({updateFirstName, updateLastName, updateAge, updateDescription}) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [age, setAge] = useState(0);
     const [userDescription, setUserDescription] = useState("");
-
-    const dispatch = useDispatch();
-
-    console.log("firstName ", firstName);
 
     const nameRegex = /^[A-Za-z ]+$/;
     const ageRegex = /^\d+$/;
 
     const handleFirstNameChange = (text) => {
         setFirstName(text);
-        dispatch(updateFirstName(text));
+        updateFirstName(text);
+    };
+
+    const handleLastNameChange = (text) => {
+        setLastName(text);
+        updateLastName(text);
+    };
+
+    const handleAgeChange = (text) => {
+        setAge(text);
+        updateAge(text);
+    };
+
+    const handleDescriptionChange = (text) => {
+        setUserDescription(text);
+        updateDescription(text);
     };
 
     return (
@@ -42,9 +73,9 @@ function FirstProfileScreen() {
             <KeyboardAvoidingView style={styles.mainContentView} behavior={'padding'}>
                 <ScrollView style={styles.mainContentInputView} contentContainerStyle={{alignItems: 'center'}}>
                     <TextField style={styles.textField} title={'First name'} titleStyle={styles.textFieldTitle} value={firstName} onChangeText={text => handleFirstNameChange(text)} error={!filterInput(firstName, nameRegex)} />
-                    <TextField style={styles.textField} title={'Last name'} titleStyle={styles.textFieldTitle} value={lastName} onChangeText={text => setLastName(text)} error={!filterInput(lastName, nameRegex)}/>
-                    <TextField style={styles.textField} title={'Age'} value={age} titleStyle={styles.textFieldTitle} onChangeText={text => setAge(text)} error={!filterInput(age, ageRegex)}/>
-                    <TextField style={styles.textField} title={'What best describes you?'} titleStyle={styles.textFieldTitle} placeholder={'e.g. High school student'} value={userDescription} onChangeText={text => setUserDescription(text)}/>
+                    <TextField style={styles.textField} title={'Last name'} titleStyle={styles.textFieldTitle} value={lastName} onChangeText={text => handleLastNameChange(text)} error={!filterInput(lastName, nameRegex)}/>
+                    <TextField style={styles.textField} title={'Age'} value={age} titleStyle={styles.textFieldTitle} onChangeText={text => handleAgeChange(text)} error={!filterInput(age, ageRegex)}/>
+                    <TextField style={styles.textField} title={'What best describes you?'} titleStyle={styles.textFieldTitle} placeholder={'e.g. High school student'} value={userDescription} onChangeText={text => handleDescriptionChange(text)}/>
                 </ScrollView>
             </KeyboardAvoidingView>
             <View style={styles.mainContentButtonView}>
@@ -109,4 +140,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FirstProfileScreen;
+export default connect(mapState, mapDispatch)(FirstProfileScreen);
