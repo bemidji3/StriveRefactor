@@ -1,19 +1,39 @@
 import * as React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {connect} from "react-redux";
+import {makeRequest} from "../../../redux/actions";
 
+const mapState = state => {
+    return {
+        state: state,
+    }
+};
 
+const mapDispatch = dispatch => {
+    return {
+        makeRequest: (payload) => dispatch(makeRequest(payload)),
+    }
+};
 
-function SubmitButton({titleText, disabled}){
+function SubmitButton({titleText, disabled, makeRequest, state}){
 
-    const handleButtonPress = () => {
-        console.log('button pressed!')
+    const handleRequest = () => {
+        const requestPayload = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({...state, timestamp: Date.now()})
+        };
+        makeRequest(requestPayload);
+        console.log("making request");
     };
 
     return <TouchableOpacity
         disabled={disabled}
         style={disabled ? styles.buttonDisabled : styles.buttonActive}
         mode={'contained'}
-        onPress={handleButtonPress}
+        onPress={handleRequest}
     >
         <Text style={styles.text}> {titleText} </Text>
     </TouchableOpacity>
@@ -42,4 +62,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SubmitButton;
+export default connect(mapState, mapDispatch)(SubmitButton);

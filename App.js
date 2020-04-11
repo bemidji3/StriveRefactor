@@ -1,10 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import AppNavigator from "./components/AppNavigator/AppNavigator";
+import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import striveApp from './redux/reducer';
+import AppNavigator from './components/AppNavigator/AppNavigator';
+import thunk from 'redux-thunk';
+
+const store = createStore(striveApp, applyMiddleware(thunk));
 
 export default function App() {
   return (
-    <AppNavigator/>
+      <Provider store={store}>
+        <AppNavigator/>
+      </Provider>
   );
 }
 
