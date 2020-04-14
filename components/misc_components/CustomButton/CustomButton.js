@@ -3,10 +3,15 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 
-function CustomButton({screenName, titleText, disabled}) {
+function CustomButton({screenName, titleText, disabled, disableBack}) {
     console.log("screenName ", screenName);
     const navigation = useNavigation();
     const handleButtonPress = () => {
+        if(disableBack){
+            navigation.setOptions({
+                headerLeft: null
+            })
+        }
         navigation.navigate(screenName);
     };
     return (

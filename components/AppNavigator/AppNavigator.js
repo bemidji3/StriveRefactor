@@ -12,6 +12,8 @@ import SecondProfileScreen from "../screens/SecondProfileScreen/SecondProfileScr
 import FirstLoadingScreen from "../screens/LoadingScreens/FirstLoadingScreen/FirstLoadingScreen";
 import SecondLoadingScreen from "../screens/LoadingScreens/SecondLoadingScreen/SecondLoadingScreen";
 import BlankScreen from "../screens/LoadingScreens/BlankScreen/BlankScreen";
+import SuccessScreen from "../screens/SuccessScreen/SuccessScreen";
+import ErrorScreen from "../screens/ErrorScreen/ErrorScreen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +32,8 @@ function AppNavigator() {
                 <Stack.Screen name={'get_started'} component={GetStarted} />
                 <Stack.Screen name={'first_profile'} component={FirstProfileScreen}/>
                 <Stack.Screen name={'second_profile'} component={SecondProfileScreen} />
+                <Stack.Screen name={'sign_up_success'} component={SuccessScreen} options={{headerLeft: null, gestureEnabled: false}}/>
+                <Stack.Screen name={'sign_up_error'} component={ErrorScreen} options={{headerLeft: null, gestureEnabled: false}} />
             </Stack.Navigator>
         </NavigationContainer>
     );

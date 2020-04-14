@@ -67,7 +67,7 @@ function SecondProfileScreen({updatePhone, updateEmail, updateCelebrity, state})
                     <TextField style={styles.textField} title={'Email'} value={email} titleStyle={styles.textFieldTitle} onChangeText={text => handleEmailChange(text)} error={!emailRegex(email)}/>
                     <TextField style={styles.textField} title={'Phone number'} titleStyle={styles.textFieldTitle} value={phone} onChangeText={text => handlePhoneChange(text)}/>
                     <View>
-                        <Text style={styles.customTopText}> Which celebrity would you like to </Text>
+                        <Text style={state.device_info === 'iPhone XS' ? styles.customTopTextLeft5 : styles.customTopTextLeft20}> Which celebrity would you like to </Text>
                     </View>
                     <TextField style={styles.textField} title={' see on strive?'} titleStyle={styles.textFieldTitle} value={celebrity} onChangeText={text => handleCelebrityChange(text)}/>
                 </ScrollView>
@@ -80,19 +80,24 @@ function SecondProfileScreen({updatePhone, updateEmail, updateCelebrity, state})
 
 }
 
-export default connect(mapState, mapDispatch)(SecondProfileScreen);
-
 const styles = StyleSheet.create({
     mainView: {
         flex: 6,
         alignItems: 'center',
         backgroundColor: '#F79353',
     },
-    customTopText: {
+    customTopTextLeft5: {
         fontSize: 20,
         fontWeight: 'bold',
         color: '#636364',
-        marginLeft: -5,
+        marginLeft: -5, //use this for iPhone XS
+        width: '85%',
+    },
+    customTopTextLeft20: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#636364',
+        marginLeft: -40, //use this for iPhone XS
         width: '85%',
     },
     customTopTextView: {
@@ -146,3 +151,5 @@ const styles = StyleSheet.create({
         color: '#636364',
     },
 });
+
+export default connect(mapState, mapDispatch)(SecondProfileScreen);

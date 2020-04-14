@@ -9,6 +9,9 @@ import {
     RECEIVE_RESPONSE,
     NEW_USER_CREATE_START,
 } from "./actions";
+import * as Device from 'expo-device';
+
+const deviceModel = Device.modelName;
 
 const initialState = {
     first_name: "",
@@ -21,9 +24,11 @@ const initialState = {
     api_key: "15c97b04fd8ebe0d590455aeba453c50",
     is_fetching: false,
     return_status: null,
+    device_info: deviceModel,
 };
 
 function striveApp(state = initialState, action) {
+    console.log("state ", state);
     switch(action.type) {
         case UPDATE_FIRST_NAME:
             return {...state, first_name: action.text};

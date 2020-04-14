@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
         color: '#5E5E5E',
         fontSize: 20,
         textAlign: 'center',
+        //flexWrap: 'wrap',
     },
     mainView: {
         flex: 1,
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
         width: 400,
         resizeMode: 'contain',
         alignItems: 'flex-start',
+        paddingBottom: 50,
     },
     logoView: {
         flex: 2,
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '85%',
         marginTop: 20,
+        //flexWrap: 'wrap',
     },
     buttonView: {
         flex: 1,

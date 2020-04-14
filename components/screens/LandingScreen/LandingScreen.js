@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#ffffff',
         textAlign: 'center',
+        flexWrap: 'wrap',
     },
     buttonView: {
         flex: 1,
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
         width: '85%',
-        marginTop: 20,
+        //marginTop: 20,
     },
 });
 

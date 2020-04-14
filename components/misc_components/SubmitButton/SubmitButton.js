@@ -2,6 +2,7 @@ import * as React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {connect} from "react-redux";
 import {makeRequest} from "../../../redux/actions";
+import {useNavigation} from '@react-navigation/native';
 
 const mapState = state => {
     return {
@@ -17,6 +18,8 @@ const mapDispatch = dispatch => {
 
 function SubmitButton({titleText, disabled, makeRequest, state}){
 
+    const navigation = useNavigation();
+
     const handleRequest = () => {
         const requestPayload = {
             method: 'POST',
@@ -25,8 +28,11 @@ function SubmitButton({titleText, disabled, makeRequest, state}){
             },
             body: JSON.stringify({...state, timestamp: Date.now()})
         };
-        makeRequest(requestPayload);
-        console.log("making request");
+        makeRequest(requestPayload).then(action => {
+            //const nextPage = 'sign_up_error';
+            const nextPage = action.response.status === 200 ? 'sign_up_success' : 'sign_up_error';
+            navigation.navigate(nextPage);
+        });
     };
 
     return <TouchableOpacity
